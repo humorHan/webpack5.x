@@ -1,0 +1,34 @@
+{
+  "editor.tabSize": 2,
+  "editor.renderWhitespace": "all",
+  "eslint.packageManager": "yarn",
+  "vetur.format.options.useTabs": false,
+  "search.exclude": {
+      "**/node_modules": true,
+      "**/static": true
+  },
+  "eslint.options": {
+      "extensions": [
+          ".js",
+          ".vue",
+          ".scss"
+      ]
+  },
+  "eslint.validate": [
+      "javascript",
+      {
+          "language": "vue",
+          "autoFix": true
+      },
+      "html",
+      "vue"
+  ],
+  "emmet.syntaxProfiles": {
+      "javascript": "js",
+      "vue-html": "html"
+  },
+  "stylelint.autoFix": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+}

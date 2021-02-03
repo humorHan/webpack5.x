@@ -1,0 +1,21 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "attach",
+      "name": "Attach to Node",
+      "port": 9231,
+      "address": "localhost",
+      "localRoot": "${workspaceFolder}",
+      "remoteRoot": "${workspaceFolder}",
+      "protocol": "inspector",
+      "env": {
+        "NODE_ENV": "test",
+        "NODE_CONFIG_DIR": "./server/config",
+        "DISABLE_HLB": "true",
+        "IS_LOCAL": "true"
+      }
+    }
+  ]
+}
