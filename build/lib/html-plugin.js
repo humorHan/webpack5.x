@@ -1,13 +1,9 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const utils = require('./utils');
 
 module.exports = function htmlPlugin(isProduction) {
   let conf = {
-    template: utils.resolve('src', 'index.html'),
     filename: 'index.html',
-    inject: 'body',
-    chunks: ['manifest', 'vendor', 'commons'],
-    chunksSortMode: 'manual',
+    inject: false,
   };
   if (isProduction) {
     conf.minify = {

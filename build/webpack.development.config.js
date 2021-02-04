@@ -23,7 +23,7 @@ module.exports = merge(baseConfig, {
   module: {
     rules: [{
       test: /\.s?(c|a)ss$/i,
-      oneOf: generateCssLoaders(isProduction).oneOf,
+      use: generateCssLoaders(isProduction),
     }]
   },
   plugins: [
@@ -34,7 +34,11 @@ module.exports = merge(baseConfig, {
     proxy: {
       '/api': 'http://localhost:8080'
     },
-    historyApiFallback: true,
+    historyApiFallback: {
+      rewrites: [
+        { from: /^\//, to: '/dist/index.html' },
+      ]
+    },
     quiet: true,
     port: 8081,
     clientLogLevel: 'none',

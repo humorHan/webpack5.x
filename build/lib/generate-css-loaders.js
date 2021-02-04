@@ -2,85 +2,66 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 /**
  * 获取style-loader的规则
- * @param {*} isProdution mode是否是production模式
+ * @param {*} isProduction mode是否是production模式
  */
-function getStyleLoaderRule(isProdution) {
+function getStyleLoaderRule(isProduction) {
   return {
-    loader: isProdution ? MiniCssExtractPlugin.loader : 'style-loader',
-    options: isProdution ? {} : {
+    loader: isProduction ? MiniCssExtractPlugin.loader : 'style-loader',
+    options: isProduction ? {} : {
       injectType: 'styleTag'
     },
   }
 }
 /**
  * 获取css-loader的规则
- * @param {*} isProdution mode是否是production模式
- * @param {*} useModules 使用css module
+ * @param {*} isProduction mode是否是production模式
  */
-function getCssLoaderRule(isProdution, useModules = false) {
-  const localIdentName = isProdution ? '[local]_[hash:base64:8]' : '[path][name]__[local]';
+function getCssLoaderRule(isProduction) {
   return {
     loader: 'css-loader',
     options: {
-      sourceMap: !isProdution,
+      sourceMap: !isProduction,
       importLoaders: 1,
-      modules: useModules ? {
-        localIdentName,
-      } : null,
     }
   };
 }
 
 /**
  * 获取postcss-loader规则
- * @param {*} isProdution mode是否是production模式
+ * @param {*} isProduction mode是否是production模式
  */
-function getPostcssLoaderRule(isProdution) {
+function getPostcssLoaderRule(isProduction) {
   return {
     loader: 'postcss-loader',
     options: {
-      config: {
-        path: process.cwd(),
-      },
-      ident: 'postcss',
-      plugins: [
-        require('autoprefixer'),
-      ],
-      sourceMap: !isProdution,
+      sourceMap: !isProduction,
+      postcssOptions: {
+        plugins: [
+          ['postcss-preset-env']
+        ],
+      }
     }
   }
 }
 
 /**
  * 获取resolve-url-loader规则
- * @param {*} isProdution mode是否是production模式
+ * @param {*} isProduction mode是否是production模式
  */
-function getResolveUrlLoaderRule(isProdution) {
+function getResolveUrlLoaderRule(isProduction) {
   return {
     loader: 'resolve-url-loader',
     options: {
-      sourceMap: !isProdution,
+      sourceMap: !isProduction,
     },
   }
 }
 
 module.exports = function generateCssLoaders(isProduction) {
-  return {
-    oneOf: [{
-      resourceQuery: /module/,
-      use: [
-        getStyleLoaderRule(isProduction),
-        getCssLoaderRule(isProduction, true),
-        getPostcssLoaderRule(isProduction),
-        getResolveUrlLoaderRule(isProduction)
-      ],
-    }, {
-      use: [
-        getStyleLoaderRule(isProduction),
-        getCssLoaderRule(isProduction, false),
-        getPostcssLoaderRule(isProduction),
-        getResolveUrlLoaderRule(isProduction)
-      ],
-    }],
-  }
+  return [
+    getStyleLoaderRule(isProduction),
+    getCssLoaderRule(isProduction),
+    getPostcssLoaderRule(isProduction),
+    getResolveUrlLoaderRule(isProduction)
+  ]
 };
