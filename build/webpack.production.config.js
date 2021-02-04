@@ -10,14 +10,14 @@ const baseConfig = require('./webpack.base.config.js')
 const generateCssLoaders = require('./lib/generate-css-loaders');
 
 const mode = 'production';
-const isProduction = mode === 'prodution';
+const isProduction = mode === 'production';
 module.exports = merge(baseConfig, {
   mode,
   cache: false,
   watch: false,
   devtool: false,
   output: {
-    publicPath: '/dist/',
+    publicPath: '/',
     filename: 'js/[name]-[hash].js',
     chunkFilename: 'js/[name]-chunk-[chunkhash].js'
   },
@@ -26,7 +26,7 @@ module.exports = merge(baseConfig, {
   },
   module: {
     rules: [{
-      test: /\.vue$/,
+      test: /\.vue$/i,
       use: {
         loader: 'vue-loader',
         options: {
@@ -34,10 +34,10 @@ module.exports = merge(baseConfig, {
         },
       }
     }, {
-      test: /\.s?(c|a)ss$/,
-      oneOf: generateCssLoaders(isProduction).oneOf,
+      test: /\.s?(c|a)ss$/i,
+      use: generateCssLoaders(isProduction),
     }, {
-      test: /\.(png|jpe?g|gif)$/,
+      test: /\.(png|jpe?g|gif)$/i,
       include: [utils.resolve('src/img')],
       use: [{
         loader: 'url-loader',

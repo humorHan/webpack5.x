@@ -1,19 +1,18 @@
 const webpack = require('webpack');
 const { merge } = require('webpack-merge');
-const utils = require('./lib/utils.js');
 const htmlPlugin = require('./lib/html-plugin.js');
 const baseConfig = require('./webpack.base.config.js')
 const generateCssLoaders = require('./lib/generate-css-loaders');
 
 const mode = 'development';
-const isProduction = mode === 'prodution';
+const isProduction = mode === 'production';
 module.exports = merge(baseConfig, {
   mode,
   cache: true,
   watch: true,
   devtool: 'inline-source-map',
   output: {
-    publicPath: '/dist/',
+    publicPath: '/',
     filename: 'js/[name].js',
     chunkFilename: 'js/[name]-chunk.js',
   },
@@ -35,19 +34,17 @@ module.exports = merge(baseConfig, {
       '/api': 'http://localhost:8080'
     },
     historyApiFallback: {
+      verbose: true,
       rewrites: [
-        { from: /^\//, to: '/dist/index.html' },
+        { from: /^\//, to: '/index.html' },
       ]
     },
-    quiet: true,
+    // quiet: true,
     port: 8081,
-    clientLogLevel: 'none',
-    contentBase: utils.resolve('dist'),
     compress: true,
     hot: true,
-    noInfo: true,
     open: true,
-    openPage: './dist/index.html',
+    openPage: './',
     logLevel: 'error'
   }
 });
