@@ -17,8 +17,8 @@ module.exports = merge(baseConfig, {
   devtool: false,
   output: {
     publicPath: '/',
-    filename: 'js/[name]-[hash].js',
-    chunkFilename: 'js/[name]-chunk-[chunkhash].js'
+    filename: 'js/[name]-[contenthash].js',
+    chunkFilename: 'js/[name]-[contenthash].chunk.js'
   },
   resolve: {
     alias: {}
@@ -35,15 +35,6 @@ module.exports = merge(baseConfig, {
     }, {
       test: /\.s?(c|a)ss$/i,
       use: generateCssLoaders(isProduction),
-    }, {
-      test: /\.(png|jpe?g|gif)$/i,
-      use: [{
-        loader: 'url-loader',
-        options: {
-          limit: 4096,
-          name: 'img/[name].[ext]?v=[hash:8]'
-        }
-      }]
     }]
   },
   optimization: {

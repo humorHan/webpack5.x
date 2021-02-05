@@ -15,14 +15,6 @@ module.exports = {
   },
   module: {
     rules: [{
-      test: /\.vue$/,
-      use: {
-        loader: 'vue-loader',
-        options: {
-          hotReload: true,
-        },
-      }
-    }, {
       test: /\.(woff2?|eot|ttf|otf)$/i,
       use: 'url-loader'
     }, {

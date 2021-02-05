@@ -9,18 +9,25 @@ const isProduction = mode === 'production';
 module.exports = merge(baseConfig, {
   mode,
   cache: true,
-  watch: true,
   devtool: 'inline-source-map',
   output: {
     publicPath: '/',
     filename: 'js/[name].js',
-    chunkFilename: 'js/[name]-chunk.js',
+    chunkFilename: 'js/[name].chunk.js',
   },
   resolve: {
     alias: {}
   },
   module: {
     rules: [{
+      test: /\.vue$/i,
+      use: {
+        loader: 'vue-loader',
+        options: {
+          hotReload: true,
+        },
+      }
+    }, {
       test: /\.s?(c|a)ss$/i,
       use: generateCssLoaders(isProduction),
     }]
@@ -45,6 +52,6 @@ module.exports = merge(baseConfig, {
     hot: true,
     open: true,
     openPage: './',
-    logLevel: 'error'
+    // logLevel: 'error'
   }
 });
