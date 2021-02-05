@@ -4,7 +4,6 @@ const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const { merge } = require('webpack-merge');
-const utils = require('./lib/utils.js');
 const htmlPlugin = require('./lib/html-plugin.js');
 const baseConfig = require('./webpack.base.config.js')
 const generateCssLoaders = require('./lib/generate-css-loaders');
@@ -38,7 +37,6 @@ module.exports = merge(baseConfig, {
       use: generateCssLoaders(isProduction),
     }, {
       test: /\.(png|jpe?g|gif)$/i,
-      include: [utils.resolve('src/img')],
       use: [{
         loader: 'url-loader',
         options: {

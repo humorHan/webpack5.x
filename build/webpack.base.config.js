@@ -11,7 +11,7 @@ module.exports = {
     libraryTarget: 'umd'
   },
   resolve: {
-    extensions: ['.js', '.vue']
+    extensions: ['.js', '.vue', '.scss']
   },
   module: {
     rules: [{

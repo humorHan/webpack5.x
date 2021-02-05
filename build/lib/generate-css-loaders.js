@@ -45,6 +45,19 @@ function getPostcssLoaderRule(isProduction) {
 }
 
 /**
+ * 获取sass-loader规则
+ * @param {*} isProduction mode是否是production模式
+ */
+function getSassLoaderRule(isProduction) {
+  return {
+    loader: 'sass-loader',
+    options: {
+      sourceMap: !isProduction,
+    },
+  }
+}
+
+/**
  * 获取resolve-url-loader规则
  * @param {*} isProduction mode是否是production模式
  */
@@ -62,6 +75,7 @@ module.exports = function generateCssLoaders(isProduction) {
     getStyleLoaderRule(isProduction),
     getCssLoaderRule(isProduction),
     getPostcssLoaderRule(isProduction),
-    getResolveUrlLoaderRule(isProduction)
+    getResolveUrlLoaderRule(isProduction),
+    getSassLoaderRule(isProduction),
   ]
 };

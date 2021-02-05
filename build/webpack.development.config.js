@@ -34,7 +34,7 @@ module.exports = merge(baseConfig, {
       '/api': 'http://localhost:8080'
     },
     historyApiFallback: {
-      verbose: true,
+      // verbose: true,
       rewrites: [
         { from: /^\//, to: '/index.html' },
       ]
