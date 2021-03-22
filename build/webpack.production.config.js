@@ -1,6 +1,6 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const { merge } = require('webpack-merge');
@@ -39,7 +39,7 @@ module.exports = merge(baseConfig, {
   },
   optimization: {
     minimizer: [
-      new OptimizeCSSAssetsPlugin({}),
+      new CssMinimizerPlugin(),
       new TerserPlugin({
         parallel: true,
         // sourceMap 真实项目可能会集合SourceMapDevToolPlugin做js反解功能
