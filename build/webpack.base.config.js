@@ -8,7 +8,8 @@ module.exports = {
   },
   output: {
     path: utils.resolve('dist'),
-    libraryTarget: 'umd'
+    libraryTarget: 'umd',
+    assetModuleFilename: 'images/[hash][ext][query]'
   },
   resolve: {
     extensions: ['.js', '.vue', '.scss']
@@ -16,15 +17,15 @@ module.exports = {
   module: {
     rules: [{
       test: /\.(woff2?|eot|ttf|otf)$/i,
-      use: 'url-loader'
+      type: 'asset',
     }, {
       test: /\.(png|gif|jpg|jpeg|svg)$/i,
-      use: [{
-        loader: 'url-loader',
-        options: {
-          limit: 4096,
+      type: 'asset',
+      parser: {
+        dataUrlCondition: {
+          maxSize: 4 * 1024 // 4kb
         }
-      }]
+      }
     }, {
       test: /\.js$/,
       exclude: [
@@ -35,11 +36,6 @@ module.exports = {
       use: {
         loader: 'babel-loader',
       }
-    }, {
-      test: /\.(mp3|mp4|pdf)$/i,
-      use: [{
-        loader: 'file-loader',
-      }],
     }]
   },
   plugins: [
