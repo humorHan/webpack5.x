@@ -11,3 +11,5 @@ npm run serve
 ```
 npm run build
 ```
+
+[![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=humorhan)](https://github.com/anuraghazra/github-readme-stats)
